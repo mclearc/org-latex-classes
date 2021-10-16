@@ -1,0 +1,74 @@
+\usepackage[english]{babel}
+\usetheme{metropolis}
+\usecolortheme{metropolis}                               
+% Set colors to match UNL
+\definecolor{unlred1}{rgb}{0.556, 0.0, 0.0}              
+\definecolor{unlred2}{rgb}{0.6667, 0.0, 0.0}             
+\definecolor{Purple}{HTML}{911146}                       
+\definecolor{Orange}{HTML}{CF4A30}                       
+\setbeamercolor{alerted text}{fg=Orange}                 
+\setbeamercolor{frametitle}{bg=unlred1}                  
+\setbeamercolor{title separator}{fg=unlred1}             
+\setbeamercolor{progress bar in section page}{fg=unlred1}
+\metroset{titleformat=smallcaps}
+
+% no "figure" in captions
+\usepackage{caption} 
+% redefines the caption setup of the figures environment in the beamer class. 
+\captionsetup[figure]{labelformat=empty}
+
+% Fix quotations to look fancy
+\setbeamerfont{quote}{shape=\upshape}
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\makeatletter
+\tikzset{%
+  fancy quotes/.style={
+    text width=\fq@width pt,
+    align=justify,
+    inner sep=1em,
+    anchor=north west,
+    minimum width=\linewidth,
+    font=\small
+  },
+  fancy quotes width/.initial={.8\linewidth},
+  fancy quotes marks/.style={
+    scale=4,
+    text=white,
+    inner sep=0pt,
+  },
+  fancy quotes opening/.style={
+    fancy quotes marks,
+  },
+  fancy quotes closing/.style={
+    fancy quotes marks,
+  },
+  fancy quotes background/.style={
+    show background rectangle,
+    inner frame xsep=0pt,
+    background rectangle/.style={
+      fill=gray!25,
+      rounded corners,
+    },
+  }
+}
+
+\renewenvironment{quote}[1][]{%
+\noindent
+\tikzpicture[fancy quotes background]
+\node[fancy quotes opening,anchor=north west] (fq@ul) at (0,0) {``};
+\tikz@scan@one@point\pgfutil@firstofone(fq@ul.east)
+\pgfmathsetmacro{\fq@width}{\linewidth - 2*\pgf@x}
+\node[fancy quotes,#1] (fq@txt) at (fq@ul.north west) \bgroup}
+{\egroup;
+\node[overlay,fancy quotes closing,anchor=east] at (fq@txt.south east) {''};
+\endtikzpicture}
+
+\makeatother
+
+
+% Color links
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+\usepackage{hyperref}
+\hypersetup{colorlinks,urlcolor=blue,linkcolor=black}

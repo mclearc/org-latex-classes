@@ -1,0 +1,120 @@
+\usepackage{unicode-math}
+\usepackage{titling}
+\usepackage[autostyle]{csquotes}
+\defaultfontfeatures{Scale=MatchLowercase}
+\defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\usepackage{bookmark}
+\usepackage{titletoc}
+\usepackage{fontspec}
+
+% Set Main Font
+% \setmainfont{Adobe Caslon Pro}
+\setmainfont{Minion Pro}
+
+%% Set Header Font
+\usepackage{sectsty}
+\allsectionsfont{\normalfont\sffamily} %sans font for section headings
+\setsansfont{Avenir}
+
+% Links
+\usepackage[svgnames]{xcolor}
+\hypersetup{linktoc=all,colorlinks=true,urlcolor=NavyBlue,citecolor=NavyBlue, linkcolor=NavyBlue}
+
+\urlstyle{same}  % don't use monospace font for urls
+
+%% Widows and Orphans
+\usepackage[all]{nowidow}
+
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+
+% Footnotes
+\usepackage[hang,flushmargin, stable, multiple]{footmisc}
+\usepackage{manyfoot}
+\DeclareNewFootnote{A}[fnsymbol]
+\usepackage{relsize}
+%% footnote formatting
+\addtolength{\footskip}{0.5cm}
+\setlength{\footnotemargin}{0.4cm}
+\setlength{\footnotesep}{0.4cm}
+
+\usepackage{breakcites}
+\usepackage{biblatex}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{setspace} \singlespacing
+\setstretch{1.15}
+
+\usepackage{enumitem}
+\usepackage{enumerate}
+\setlist[itemize]{noitemsep, topsep=0pt}
+\setlist[enumerate]{noitemsep, topsep=0pt}
+\usepackage{fancyhdr} %For headers and footers
+\pagestyle{fancy} %For headers and footers
+\usepackage{lastpage} %For getting page x of y
+\usepackage{float} %Allows the figures to be positioned and formatted nicely
+\floatstyle{boxed} %using this
+\restylefloat{figure} %and this command
+
+\chead{}
+\rhead{}
+\lhead{\thetitle}
+\cfoot{}
+\rfoot{\footnotesize{\thepage\ | \pageref{LastPage}}}
+\lfoot{\footnotesize{Colin McLear \\ \thedate}}
+
+
+% Redefine unnumbered sections to behave like numbered
+\usepackage{xparse}
+
+\let\oldsection\section
+\makeatletter
+\newcounter{@secnumdepth}
+\RenewDocumentCommand{\section}{s o m}{%
+  \IfBooleanTF{#1}
+    {\setcounter{@secnumdepth}{\value{secnumdepth}}% Store secnumdepth
+     \setcounter{secnumdepth}{0}% Print only up to \chapter numbers
+     \oldsection{#3}% \section*
+     \setcounter{secnumdepth}{\value{@secnumdepth}}}% Restore secnumdepth
+    {\IfValueTF{#2}% \section
+       {\oldsection[#2]{#3}}% \section[.]{..}
+       {\oldsection{#3}}}% \section{..}
+}
+
+% Add bar for quote blocks
+\usepackage[most]{tcolorbox} 
+\definecolor{block-gray}{gray}{0.98}
+
+\newtcolorbox{quote-b}{%
+    colback=block-gray,
+    grow to right by=-10mm,
+    grow to left by=-10mm, 
+    boxrule=0pt,
+    boxsep=0pt,
+    breakable,
+    enhanced jigsaw,
+    borderline west={2pt}{0pt}{gray}}
+
+% Make title look better
+\pretitle{\begin{flushleft}\huge}
+\title{}
+\posttitle{\par\end{flushleft}}
+\setlength{\droptitle}{-60pt}
+
+\preauthor{\begin{flushleft}\Large}
+\author{}
+\postauthor{\par\end{flushleft}} 
+
+\predate{\begin{flushleft}\footnotesize}
+\date{}
+\postdate{\par\end{flushleft}}
