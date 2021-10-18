@@ -1,0 +1,2 @@
+These are files for creating slides, handouts, and notes by converting from org to
+latex-pdf. For more on this workflow see this [[https://www.colinmclear.net/posts/teaching-notes/][blog post]] and [[https://github.com/mclear-tools/dotemacs/blob/master/setup-config/setup-teaching.el][these functions]]. 
