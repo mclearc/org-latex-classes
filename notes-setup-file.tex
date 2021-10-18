@@ -1,23 +1,60 @@
-\usepackage{unicode-math}
 \usepackage{titling}
+\usepackage{bookmark}
+\usepackage{unicode-math}
+\usepackage{titletoc}
 \usepackage[autostyle]{csquotes}
 \defaultfontfeatures{Scale=MatchLowercase}
 \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-\usepackage{bookmark}
-\usepackage{titletoc}
-\usepackage{fontspec}
 
 % Set Font
+\usepackage{fontspec}
 \setmainfont{Adobe Caslon Pro}
 % \setmainfont{Minion Pro}
 
 \usepackage[svgnames]{xcolor}
 \hypersetup{linktoc=all,colorlinks=true,urlcolor=NavyBlue,citecolor=NavyBlue, linkcolor=NavyBlue}
-
 \urlstyle{same}  % don't use monospace font for urls
+
+\usepackage{enumitem}
+\usepackage{enumerate}
+\setlist[itemize]{noitemsep, topsep=0pt}
+\setlist[enumerate]{noitemsep, topsep=0pt}
+
+
+\usepackage{fancyhdr} %For headers and footers
+\pagestyle{fancy} %For headers and footers
+\usepackage{lastpage} %For getting page x of y
+\usepackage{float} %Allows the figures to be positioned and formatted nicely
+\floatstyle{boxed} %using this
+\restylefloat{figure} %and this command
+
+%% Default fancy settings
+\chead{}
+\rhead{}
+\lhead{\thetitle}
+\cfoot{}
+\rfoot{\footnotesize{\thepage\ | \pageref{LastPage}}}
+\lfoot{\footnotesize{Colin McLear \\ \thedate}}
 
 %% Widows and Orphans
 \usepackage[all]{nowidow}
+
+% Redefine unnumbered sections to behave like numbered
+\usepackage{xparse}
+
+\let\oldsection\section
+\makeatletter
+\newcounter{@secnumdepth}
+\RenewDocumentCommand{\section}{s o m}{%
+  \IfBooleanTF{#1}
+    {\setcounter{@secnumdepth}{\value{secnumdepth}}% Store secnumdepth
+     \setcounter{secnumdepth}{0}% Print only up to \chapter numbers
+     \oldsection{#3}% \section*
+     \setcounter{secnumdepth}{\value{@secnumdepth}}}% Restore secnumdepth
+    {\IfValueTF{#2}% \section
+       {\oldsection[#2]{#3}}% \section[.]{..}
+       {\oldsection{#3}}}% \section{..}
+}
 
 % Redefines (sub)paragraphs to behave more like sections
 \ifx\paragraph\undefined\else
@@ -52,42 +89,6 @@
 \usepackage[margin=1.25in]{geometry}
 \usepackage{setspace} \singlespacing
 \setstretch{1.15}
-
-\usepackage{enumitem}
-\usepackage{enumerate}
-\setlist[itemize]{noitemsep, topsep=0pt}
-\setlist[enumerate]{noitemsep, topsep=0pt}
-\usepackage{fancyhdr} %For headers and footers
-\pagestyle{fancy} %For headers and footers
-\usepackage{lastpage} %For getting page x of y
-\usepackage{float} %Allows the figures to be positioned and formatted nicely
-\floatstyle{boxed} %using this
-\restylefloat{figure} %and this command
-
-\chead{}
-\rhead{}
-\lhead{\thetitle}
-\cfoot{}
-\rfoot{\footnotesize{\thepage\ | \pageref{LastPage}}}
-\lfoot{\footnotesize{Colin McLear \\ \thedate}}
-
-
-% Redefine unnumbered sections to behave like numbered
-\usepackage{xparse}
-
-\let\oldsection\section
-\makeatletter
-\newcounter{@secnumdepth}
-\RenewDocumentCommand{\section}{s o m}{%
-  \IfBooleanTF{#1}
-    {\setcounter{@secnumdepth}{\value{secnumdepth}}% Store secnumdepth
-     \setcounter{secnumdepth}{0}% Print only up to \chapter numbers
-     \oldsection{#3}% \section*
-     \setcounter{secnumdepth}{\value{@secnumdepth}}}% Restore secnumdepth
-    {\IfValueTF{#2}% \section
-       {\oldsection[#2]{#3}}% \section[.]{..}
-       {\oldsection{#3}}}% \section{..}
-}
 
 % Add bar for quote blocks
 \usepackage[most]{tcolorbox} 
